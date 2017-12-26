@@ -5,7 +5,7 @@ return {
   name = "Auto-insertion of function comments",
   description = [[Type --- to add a function comment with @params and @return]],
   author = "Migos",
-  version = 0.1,
+  version = 0.2,
 
   onEditorCharAdded = function(self, editor, event)
     local keycode = event:GetKey()
@@ -21,7 +21,7 @@ return {
         -- build comment
         local comment = " "
         -- get name
-        comment = comment .. lineafter:match("function (%w+)%s*%(") .. " \n-- \n"
+        comment = comment .. lineafter:match("function ([%w_%.%:]+)%s*%(") .. " \n-- \n"
         -- get params
         for p in string.gmatch(lineafter:match("%((.*)%)"), "%a+") do
             comment = comment .. params .. p .. "\n"
